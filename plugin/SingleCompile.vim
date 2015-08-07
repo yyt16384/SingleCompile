@@ -35,34 +35,34 @@ set cpo&vim
 
 
 " commands {{{1
-command -nargs=* SCCompile
+command! -nargs=* SCCompile
             \ if <q-args> == '' | call SingleCompile#Compile() |
             \ else | call SingleCompile#Compile(<q-args>) | endif
-command -nargs=* SCCompileRun
+command! -nargs=* SCCompileRun
             \ if <q-args> == '' | call SingleCompile#CompileRun() |
             \ else | call SingleCompile#CompileRun(<q-args>) | endif
-command -nargs=* SCCompileRunAsync
+command! -nargs=* SCCompileRunAsync
             \ if <q-args> == '' | call SingleCompile#CompileRunAsync() |
             \ else | call SingleCompile#CompileRunAsync(<q-args>) | endif
-command -nargs=* SingleCompile
+command! -nargs=* SingleCompile
             \ if <q-args> == '' | call SingleCompile#Compile() |
             \ else | call SingleCompile#Compile(<q-args>) | endif
-command -nargs=* SingleCompileRun
+command! -nargs=* SingleCompileRun
             \ if <q-args> == '' | call SingleCompile#CompileRun() |
             \ else | call SingleCompile#CompileRun(<q-args>) | endif
-command -nargs=+ SCCompileAF
+command! -nargs=+ SCCompileAF
             \ call SingleCompile#Compile('AdditionalFlags', <q-args>)
-command -nargs=+ SCCompileRunAF
+command! -nargs=+ SCCompileRunAF
             \ call SingleCompile#CompileRun('AdditionalFlags', <q-args>)
-command -nargs=+ SCCompileRunAsyncAF
+command! -nargs=+ SCCompileRunAsyncAF
             \ call SingleCompile#CompileRunAsync('AdditionalFlags', <q-args>)
-command SCIsRunningAsync
+command! SCIsRunningAsync
             \ if SingleCompileAsync#IsRunning() == 1 |
             \ echo 'The background process is running.' |
             \ else |
             \ echo 'The background process is not running.' |
             \ endif
-command SCTerminateAsync
+command! SCTerminateAsync
             \ if SingleCompileAsync#Terminate() |
             \ echohl ErrorMsg |
             \ echo 'Failed to terminate the background process!' |
@@ -70,10 +70,10 @@ command SCTerminateAsync
             \ else |
             \ echo 'Background process terminated.' |
             \ endif
-command SCChooseCompiler call SingleCompile#ChooseCompiler(&filetype)
-command SCChooseInterpreter call SingleCompile#ChooseCompiler(&filetype)
-command SCViewResult call SingleCompile#ViewResult(0)
-command SCViewResultAsync call SingleCompile#ViewResult(1)
+command! SCChooseCompiler call SingleCompile#ChooseCompiler(&filetype)
+command! SCChooseInterpreter call SingleCompile#ChooseCompiler(&filetype)
+command! SCViewResult call SingleCompile#ViewResult(0)
+command! SCViewResultAsync call SingleCompile#ViewResult(1)
 
 " menus {{{1
 
