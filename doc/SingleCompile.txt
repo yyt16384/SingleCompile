@@ -474,6 +474,15 @@ line to your vimrc:
  let g:SingleCompile_usequickfix = 0
 <
 
+                                            *SingleCompile-usebuiltintemplates*
+                                            *g:SingleCompile_usebuiltintemplates*
+If you don't want to use built-in templates, add the following line to your
+vimrc:
+>
+ let g:SingleCompile_usebuiltintemplates = 0
+<
+The default value of g:SingleCompile_usebuiltintemplates is 1.
+
 
 KEY-MAPPING~
                                             *SingleCompile-key-mapping*

@@ -590,6 +590,12 @@ function! s:Initialize() "{{{1
         let g:SingleCompile_silentcompileifshowquickfix = 0
     endif
 
+    if !exists('g:SingleCompile_usebuiltintemplates') ||
+                \type(g:SingleCompile_usebuiltintemplates) != type(0)
+        unlet! g:SingleCompile_usebuiltintemplates
+        let g:SingleCompile_usebuiltintemplates = 1
+    endif
+
     " Initialize async mode
     if g:SingleCompile_asyncrunmode !=? 'none'
         let l:async_init_res = SingleCompileAsync#Initialize(
@@ -623,56 +629,58 @@ function! s:Initialize() "{{{1
         let g:SingleCompile_common_out_file = '$(FILE_TITLE)$'
     endif
 
-    for builtin_filetype in [
-                \ 'ada',
-                \ 'bash',
-                \ 'c',
-                \ 'cmake',
-                \ 'cpp',
-                \ 'coffee',
-                \ 'cs',
-                \ 'csh',
-                \ 'd',
-                \ 'dosbatch',
-                \ 'elixir',
-                \ 'erlang',
-                \ 'fortran',
-                \ 'go',
-                \ 'haskell',
-                \ 'html',
-                \ 'idlang',
-                \ 'java',
-                \ 'javascript',
-                \ 'ksh',
-                \ 'lisp',
-                \ 'ls',
-                \ 'lua',
-                \ 'make',
-                \ 'markdown',
-                \ 'matlab',
-                \ 'ocaml',
-                \ 'objc',
-                \ 'pascal',
-                \ 'perl',
-                \ 'php',
-                \ 'python',
-                \ 'qml',
-                \ 'r',
-                \ 'rst',
-                \ 'ruby',
-                \ 'rust',
-                \ 'scala',
-                \ 'sh',
-                \ 'tcl',
-                \ 'tcsh',
-                \ 'tex',
-                \ 'vb',
-                \ 'vim',
-                \ 'xhtml',
-                \ 'zsh']
-        exec 'call SingleCompile#templates#' .
-                    \ builtin_filetype . '#Initialize()'
-    endfor
+    if g:SingleCompile_usebuiltintemplates
+        for builtin_filetype in [
+                    \ 'ada',
+                    \ 'bash',
+                    \ 'c',
+                    \ 'cmake',
+                    \ 'cpp',
+                    \ 'coffee',
+                    \ 'cs',
+                    \ 'csh',
+                    \ 'd',
+                    \ 'dosbatch',
+                    \ 'elixir',
+                    \ 'erlang',
+                    \ 'fortran',
+                    \ 'go',
+                    \ 'haskell',
+                    \ 'html',
+                    \ 'idlang',
+                    \ 'java',
+                    \ 'javascript',
+                    \ 'ksh',
+                    \ 'lisp',
+                    \ 'ls',
+                    \ 'lua',
+                    \ 'make',
+                    \ 'markdown',
+                    \ 'matlab',
+                    \ 'ocaml',
+                    \ 'objc',
+                    \ 'pascal',
+                    \ 'perl',
+                    \ 'php',
+                    \ 'python',
+                    \ 'qml',
+                    \ 'r',
+                    \ 'rst',
+                    \ 'ruby',
+                    \ 'rust',
+                    \ 'scala',
+                    \ 'sh',
+                    \ 'tcl',
+                    \ 'tcsh',
+                    \ 'tex',
+                    \ 'vb',
+                    \ 'vim',
+                    \ 'xhtml',
+                    \ 'zsh']
+            exec 'call SingleCompile#templates#' .
+                        \ builtin_filetype . '#Initialize()'
+        endfor
+    endif
 endfunction
 
 function! s:SetVimCompiler(lang_name, compiler) " {{{1
